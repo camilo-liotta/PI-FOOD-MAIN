@@ -35,12 +35,6 @@ const getApi = async (req, res) => {
                 return (`Paso ${elementStep.number}: ${elementStep.step}.`)
             });
 
-            // let step = element.analyzedInstructions.map( elementStep => {
-            //     return elementStep.steps.map( realStep => {
-            //         return (`Paso ${realStep.number}: ${realStep.step}.`)
-            //     });
-            // });
-
             return({
                 id: element.id,
                 name: element.title.toLowerCase(),
@@ -76,7 +70,7 @@ const getApi = async (req, res) => {
                 createdInDb: i.createdInDb
             }
         });
-        // console.log(arrConj);
+
         return (arrConj);
 
     } catch (error) {

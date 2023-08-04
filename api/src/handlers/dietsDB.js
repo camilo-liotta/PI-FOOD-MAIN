@@ -11,7 +11,7 @@ const dietsDB = async (req, res) => {
             
             const allRecipes = await allRecipesAPI();
             
-            // const dietsNames = existentDiets.map(diet => diet.name);
+            
             const dietsNames = [];
 
             allRecipes.map( recipe => {

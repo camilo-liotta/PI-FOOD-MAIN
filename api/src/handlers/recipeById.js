@@ -14,25 +14,39 @@ const recipeById = async (req, res) => {
             
             recipeFound = await dbByID(id);
             recipeName = recipeFound.name;
+            recipeSteps = recipeFound.steps;
+
+            if( !recipeFound ) throw new Error(`No existe una receta de ID ${id}`);
 
         } else {                                    // Si es un numero se busca en la api
             
             recipeFound = await apiByID(id);
+            
             recipeName = recipeFound.title;
 
+            recipeFound.createdInDb = false;
+            
+            if( !recipeFound ) throw new Error(`No existe una receta de ID ${id}`);
+
+            //TODO Se ordenan los steps ya que vienen en objetos individuales con mucha informacion
+    
+            var recipeSteps;
+    
+            if(recipeFound.analyzedInstructions.length !== 0) {
+    
+                recipeSteps = recipeFound.analyzedInstructions[0];
+                
+                recipeSteps = recipeSteps.steps;
+                
+                recipeSteps = recipeSteps.map( singleStep => {
+                    return(`Step ${singleStep.number}: ${singleStep.step}`);
+                });
+    
+            } else {
+                recipeSteps = [];
+            }
+
         }
-
-        if( !recipeFound ) throw new Error(`No existe un personaje de ID ${id}`);
-
-
-        //TODO Se ordenan los steps ya que vienen en objetos individuales con mucha informacion
-
-        let recipeSteps = recipeFound.analyzedInstructions[0];
-        recipeSteps = recipeSteps.steps;
-
-        recipeSteps = recipeSteps.map( singleStep => {
-            return(`Step ${singleStep.number}: ${singleStep.step}`);
-        });
 
         // Se manda solo la informacion requerida en un objeto recipe 
 
@@ -42,7 +56,9 @@ const recipeById = async (req, res) => {
             summary: recipeFound.summary.replace(/<[^>]+>/g, ""),
             steps: recipeSteps,
             diets: recipeFound.diets,
-            image: recipeFound.image
+            image: recipeFound.image,
+            healthScore: recipeFound.healthScore,
+            createdInDb: recipeFound.createdInDb
         }
 
         res.status(200).json(recipe);

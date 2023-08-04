@@ -1,5 +1,5 @@
-// const { API_KEY } = process.env;
-const API_KEY = '1b3e0d043a8145dda7df292f2668dac6';
+require('dotenv').config();
+const { API_KEY } = process.env;
 const axios = require('axios');
 
 const allRecipesAPI = async () => {
@@ -7,7 +7,6 @@ const allRecipesAPI = async () => {
     try {
         
         const apiRequest = await axios.get(
-            // `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`
             `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
         );
         
@@ -26,7 +25,8 @@ const allRecipesAPI = async () => {
                     })
                 }).flat(),
                 image: recipe.image,
-                diets: recipe.diets ? recipe.diets : "there aren't diets"
+                diets: recipe.diets ? recipe.diets : "there aren't diets",
+                createdInDb: false
             }
         });
 
@@ -47,7 +47,7 @@ const apiByID = async (id) => {
         if(!foundRecipe) { throw new Error('error en la API') }
 
         const recipeData = foundRecipe.data;
-        
+        // console.log(recipeData);
         return(recipeData);
 
     } catch (error) {
@@ -64,8 +64,8 @@ const apiByName = async (name) => {
         if(!everyApiRecipe) throw new Error('error en la API');
         
         const coincidencias = [];
-
-        everyApiRecipe.forEach( recipe => {
+        
+        everyApiRecipe.forEach( recipe => {           
             if (recipe.name.includes(name.toLowerCase())) {
                 coincidencias.push(recipe);
             }

@@ -7,7 +7,8 @@ const recipePost = async (req, res) => {
     try {
         
         if (!name || !summary || !healthScore || !image || !diets) {
-            res.status(404).send('Faltan datos')
+            console.log('alguno no recibe');
+            throw new Error('Faltan datos');
         }
 
         const newRecipe = await Recipe.create({
@@ -16,27 +17,30 @@ const recipePost = async (req, res) => {
             healthScore,
             steps,
             image
-        })
+        });
 
 
-        diets.forEach( async (diet) => {
-
-            const newDiet = await Diet.findOrCreate({
-                where: {name: diet},
-                defaults: {name:diet}
+        const dietPromisesArr = diets.map( async (singleDiet) => {
+            const [newDiet] = await Diet.findOrCreate({
+                where: {name: singleDiet},
+                defaults: {name: singleDiet}
             });
 
-            newRecipe.addDiet(newDiet);
+            return newDiet;
 
         });
+
+        const newDiets = await Promise.all(dietPromisesArr);
+
+        await newRecipe.addDiets(newDiets);
 
         res.status(200).send('Recipe created successfully');
 
     } catch (error) {
-        throw new Error(error.message);
+        console.error("Error en la creación de receta: ");
+        res.tatus(400).send(error.message)
     }
 
 }
-
 
 module.exports = {recipePost};

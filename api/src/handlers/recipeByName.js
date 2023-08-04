@@ -1,5 +1,5 @@
-const { apiByName } = require('./Controllers/recipesAPI');
-const { dbByName } = require('./Controllers/recipesDB');
+const { apiByName, allRecipesAPI } = require('./Controllers/recipesAPI');
+const { dbByName, allRecipesDB } = require('./Controllers/recipesDB');
 
 const recipeByName = async (req, res) => {
 
@@ -7,18 +7,36 @@ const recipeByName = async (req, res) => {
 
     try {
         
-        const coincidenciasApi = await apiByName(name);
-        const coincidenciasDB = await dbByName(name);
+        if (name === undefined) {
+                
+            const recipesAPI = await allRecipesAPI();
+            const recipesDB = await allRecipesDB();
 
-        const arrayCoincidencias = [...coincidenciasApi, ...coincidenciasDB];
+            const allRecipes = [...recipesAPI, ...recipesDB];
+            
+            res.status(200).json(allRecipes);
+            
+        } else {
 
-        if(arrayCoincidencias.length === 0) { throw new Error(`No existe la receta ${name}`); }
-
-        res.status(200).json(arrayCoincidencias);
+            const coincidenciasApi = await apiByName(name);
+            const coincidenciasDB = await dbByName(name);
+    
+            const arrayCoincidencias = [...coincidenciasApi, ...coincidenciasDB];
+    
+            if(arrayCoincidencias.length === 0) { throw new Error(`No existe la receta ${name}`); }
+    
+            res.status(200).json(arrayCoincidencias);
+            
+        }
+ 
 
     } catch (error) {
         res.status(404).send(error.message);
     }
+
+
+
+
 
 }
 
