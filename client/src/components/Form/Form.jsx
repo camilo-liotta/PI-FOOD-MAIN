@@ -292,7 +292,6 @@ export default function Form() {
           <button className='boton' type='submit' disabled={!isSubmitButtonEnabled}>SUBMIT</button>
         </form>
       </div>
-      <div className='blob' ></div>
     </div>
   )
 
