@@ -240,10 +240,10 @@ export default function Form() {
                     <li key={index}>
                       {index + 1} - {step}
                       <button className='editButton' type='button' onClick={() => handleEditStep(index)}>
-                      </button>
+                      Edit</button>
                       
                       <button className='deleteButton' type='button' onClick={() => handleDeleteStep(index)} >
-                      </button>
+                      Delete</button>
                     </li>
                   )
                 })
@@ -270,7 +270,7 @@ export default function Form() {
           <div>
             {/* Input de las Dietas */}
             <label>DIETS</label>
-            <div>
+            <div className='diets-container'>
               {allDiets?.map(diet => (
                 <label key={diet.name}>
                   <input 

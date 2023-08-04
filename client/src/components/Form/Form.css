@@ -15,7 +15,7 @@
 }
 
 .login {
-    width: 400px;
+    width: 600px;
     min-height: 250px;
     background: rgba( 255, 255, 255, 0 );
     box-shadow: 0 5px 32px 0 rgba(112, 112, 112, 0.37);
@@ -143,6 +143,12 @@
     transition: box-shadow 0.1s ease;
     transition: transform 0.1s ease;
 
+}
+
+.diet-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
 }
 
 .login button:hover{
