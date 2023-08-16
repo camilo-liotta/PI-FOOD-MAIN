@@ -12,6 +12,7 @@ function Cards({ allRecipes, filteredRecipes, allDiets, setFilterByDiet, setFilt
     const [filterByDiet, setFilterByDietState] = useState('');
     const [filterByOrigin, setFilterByOriginState] = useState('');
     const [orderCards, setOrderState] = useState("true");
+    const [currentPage, setCurrentPage] = useState(1);
 
     const dispatch = useDispatch();
 
@@ -33,11 +34,13 @@ function Cards({ allRecipes, filteredRecipes, allDiets, setFilterByDiet, setFilt
     // }, [orderCards]);
 
     const handleFilterByDiet = (event) => {
+        setCurrentPage(1)
         const filterValue = event.target.value;
         setFilterByDiet(filterValue);
     }
 
     const handleFilterByOrigin = (event) => {
+        setCurrentPage(1)
         const filterValue = event.target.value;
         setFilterByOrigin(filterValue);
     }
@@ -49,9 +52,8 @@ function Cards({ allRecipes, filteredRecipes, allDiets, setFilterByDiet, setFilt
         resetFilters();
     };
 
-    const handleOrder = (event) => {
-        const orderValue = event.target.value;
-        setOrderState(orderValue);
+    const handleOrder = () => {
+        setOrderState(!orderCards);
     }
 
     const recipes = [...(filteredRecipes.length === 0 ? allRecipes : filteredRecipes)].sort((a, b) => {
@@ -71,10 +73,15 @@ function Cards({ allRecipes, filteredRecipes, allDiets, setFilterByDiet, setFilt
 
             <div className='selectContainer'>
                 
-                <select className='selects' onChange={handleOrder}>
+                {/* <select className='selects' onChange={handleOrder}>
                     <option value="true">A-Z</option>
                     <option value="false">Z-A</option>
-                </select>
+                </select> */}
+                <button onClick={handleOrder}>
+                    {
+                        orderCards ? "A-Z" : "Z-A"
+                    }
+                </button>
 
                 <select className='selects' onChange={handleFilterByOrigin}>
                     <option value="">All</option>
@@ -100,7 +107,7 @@ function Cards({ allRecipes, filteredRecipes, allDiets, setFilterByDiet, setFilt
             <div className='cards-organization'>
 
             {
-                <Pagination recipes={recipes}/>
+                <Pagination recipes={recipes} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
             }
 
             </div>

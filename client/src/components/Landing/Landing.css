@@ -4,10 +4,25 @@
     display: flex;
     min-height: 100vh;
     width: 100%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     overflow: hidden;
+}
+
+.landingContainer{
+    display: flex;
+    height: 550px;
+    width: 30%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 360px;
+    /* background-color: hsl(240, 8%, 12%); */
+    background-color: hsl(218, 11%, 14%);
 }
 
 #ingresar {
@@ -19,9 +34,27 @@
     font-size: 23px;
     font-weight: 500;
     transition: all 0.3s;
+    background-color: hsl(0, 0%, 11%);
+}
+
+.text {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 50px;
+}
+
+.title{
+    color: hsl(220, 7%, 91%);
+}
+
+.subtitle {
+    color: #7ED957;
 }
 
 #ingresar:hover{
-    transform: scale(1.03);
-    box-shadow: 0 0px 27px 0 rgba(112, 112, 112, 0.37);
+    /* transform: scale(1.03); */
+    /* box-shadow: 0 0px 27px 0 rgba(112, 112, 112, 0.37); */
 }

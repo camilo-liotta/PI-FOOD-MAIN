@@ -16,7 +16,7 @@ function SearchBar({onSearch}) {
     const handleInputChange = (event) => {
         
         const value = event.target.value;
-        setSearchText(value);
+        setSearchText(value.toUpperCase());
         setShowSuggestions(value !== '');
 
         if(searchText === '') {
@@ -27,7 +27,7 @@ function SearchBar({onSearch}) {
             recipe.name.toUpperCase().includes(value.toUpperCase())
         );
 
-        setSuggestions(filtered);
+        setSuggestions(filtered.slice(0, 10));
 
     };
 

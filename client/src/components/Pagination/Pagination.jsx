@@ -3,9 +3,8 @@ import Card from '../Card/Card';
 import Error from '../Error/Error';
 import './Pagination.css';
 
-const Pagination = ({ recipes }) => {
+const Pagination = ({ recipes, currentPage, setCurrentPage }) => {
 
-    const [currentPage, setCurrentPage] = useState(1);
 
     const totalRecipes = recipes.length;
     

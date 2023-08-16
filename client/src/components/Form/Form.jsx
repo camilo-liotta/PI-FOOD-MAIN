@@ -267,14 +267,15 @@ export default function Form() {
 
           </div>
 
-          <div>
+          <div className='diets-container'>
             {/* Input de las Dietas */}
             <label>DIETS</label>
-            <div className='diets-container'>
+            <div >
               {allDiets?.map(diet => (
-                <label key={diet.name}>
+                <label className='diet-name' key={diet.name}>
                   <input 
                     type='checkbox'
+                    className='diet-input'
                     name={diet.name}
                     value={diet.name}
                     onChange={event => handleDiets(event)}

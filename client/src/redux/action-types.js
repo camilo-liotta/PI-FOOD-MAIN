@@ -3,4 +3,3 @@ export const SET_ALL_DIETS = 'SET_ALL_DIETS';
 export const SET_FILTER_BY_DIET = 'SET_FILTER_BY_DIET';
 export const SET_FILTER_BY_ORIGIN = 'SET_FILTER_BY_ORIGIN';
 export const RESET_FILTERS = 'RESET_FILTERS';
-

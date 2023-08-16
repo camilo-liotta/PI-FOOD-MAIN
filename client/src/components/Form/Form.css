@@ -15,18 +15,20 @@
 }
 
 .login {
-    width: 30%;
+    width: 50%;
     min-height: 250px;
     background: rgba( 255, 255, 255, 0 );
-    box-shadow: 0 5px 32px 0 rgba(112, 112, 112, 0.37);
+    /* box-shadow: 0 5px 32px 0 rgba(112, 112, 112, 0.37); */
     backdrop-filter: blur( 18px );
     -webkit-backdrop-filter: blur( 18px );
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     border-radius: 1rem;
     padding: 1.5rem;
-    z-index: 10;
+    z-index: 0;
     color: whitesmoke;
     display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
     justify-content: center;
     transition: background 0.2s;
 }
@@ -51,9 +53,9 @@ textarea {
 
 }
 
-.login:hover{
+/* .login:hover{
     background: rgba( 255, 255, 255, 0.05 );
-}
+} */
 
 .login div {
     
@@ -165,10 +167,18 @@ textarea {
 
 }
 
-.diet-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
+.diets-container {
+    display:inline-block;
+    /* flex-wrap: wrap; */
+    /* justify-content: start; */
+}
+
+.diet-input {
+    margin-right: 8px;
+}
+
+.diet-name {
+    /* color: #7ED957; */
 }
 
 .login button:hover{
